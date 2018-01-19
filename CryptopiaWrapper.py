@@ -70,3 +70,32 @@ class Public:
 				return TradePair
 		except:
 			return f"Problems accessing {self.url}"
+
+	#method for getting information from Cryptopia API on all market pairs.
+	def getMarkets(self, basemarket=None, hours=24):
+		if basemarket == None and hours == 24:
+			url = self.url + "GetMarkets";
+			MarketsInfo = req.get(url)
+
+			return MarketsInfo.json()
+
+		if basemarket != None and (hours <= 24 and hours > 0):
+			url = self.url + "GetMarkets/" + basemarket
+			MarketsInfo = req.get(url)
+
+			return MarketsInfo.json()
+
+		if basemarket == None and (hours <= 24 and hours > 0):
+			url = self.url + "GetMarkets/" + str(hours)
+			MarketsInfo = req.get(url)
+
+			return MarketsInfo.json()
+
+		if basemarket != None and (hours <= 24 and hours > 0):
+			url = self.url + "GetMarkets/" + basemarket + "/" + str(hours)
+			MarketsInfo = req.get(url)
+
+			return MarketsInfo.json() 
+
+
+
