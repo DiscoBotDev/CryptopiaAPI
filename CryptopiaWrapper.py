@@ -99,3 +99,29 @@ class Public:
 
 
 
+	#method for getting information from Cryptopia API on an individual market pair
+	def getMarket(self, basepair=None, hours=24):
+
+		if type(hours) != int:
+			return "This is not an integer."
+
+		if hours < 0 or hours > 24:
+			return "You entered an invalid hour format."
+
+		if basepair != None and hours == 24:
+			url = self.url + "GetMarket/" + str(basepair) + "/"
+			MarketInfo = req.get(url)
+
+			if MarketInfo.json() != None:
+				return MarketInfo.json()
+			else:
+				return "It appears that you did not enter a proper pair."
+
+		if basepair != None and (hours < 24 and hours > 0):
+			url = self.url + "GetMarket/" + str(basepair) + "/" + str(hours)
+			MarketInfo = req.get(url)
+
+			if MarketInfo.json() != None:
+				return MarketInfo.json()
+			else:
+				return "It appears that you did not enter a proper pair."

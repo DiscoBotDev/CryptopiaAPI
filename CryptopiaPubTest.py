@@ -21,3 +21,17 @@ CryptoTest = Public();
 # print(CryptoTest.getMarkets(None, 12));
 
 # print(CryptoTest.getMarkets('BTC', 13))
+
+# print(CryptoTest.getMarket(100))
+
+# print(CryptoTest.getMarket('DOT_BTC'))
+
+# print(CryptoTest.getMarket(100,6))
+
+# print(CryptoTest.getMarket('DOT_BTC',25))
+
+# print(CryptoTest.getMarket(100, -1))
+
+# print(CryptoTest.getMarket(100, 'pie'))
+
+# print(CryptoTest.getMarket('DOT_BTC', 6))
