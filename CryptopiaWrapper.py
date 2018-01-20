@@ -125,3 +125,104 @@ class Public:
 				return MarketInfo.json()
 			else:
 				return "It appears that you did not enter a proper pair."
+
+	#method for getting market history from Cryptopia API on an individual market pair.
+	def getMarketHistory(self, basepair=None, hours=24):
+
+		if type(hours) != int:
+			return "This is not an integer."
+
+		if hours < 0:
+			return "You entered an invalid hour format."
+
+		if basepair != None and hours == 24:
+			url = self.url + "GetMarketHistory/" + str(basepair)
+			MarketHistoryInfo = req.get(url)
+
+			if MarketHistoryInfo.json() != None:
+				return MarketHistoryInfo.json()
+			else:
+				return "It appears that you did not enter a proper pair."
+
+		if basepair != None and hours != 24:
+			url = self.url + "GetMarketHistory/" + str(base) + "/" + str(hours)
+			MarketHistoryInfo = req.get(url)
+
+			if MarketHistoryInfo.json() != None:
+				return marketHistoryInfo.json()
+			else:
+				return "It appears that you did not enter a proper pair."
+
+	#method for getting order list from Cryptopia API on an individual pair.
+	def getMarketOrders(self, basepair=None, orders=100):
+		if type(orders) != int:
+			return "This is not an integer."
+
+		if orders < 0:
+			return "You entered an invalid amount of orders."
+
+		if basepair != None and orders == 100:
+			url = self.url + "GetMarketHistory/" + str(basepair)
+			MarketOrdersInfo = req.get(url)
+
+			if MarketOrdersInfo.json() != None:
+				return MarketHistoryInfo.json()
+			else:
+				return "It appears that you did not enter a proper pair."
+
+		if basepair != None and hours != 100:
+			url = self.url + "GetMarketHistory/" + str(base) + "/" + str(orders)
+			MarketOrdersInfo = req.get(url)
+
+			if MarketOrdersInfo.json() != None:
+				return marketHistoryInfo.json()
+			else:
+				return "It appears that you did not enter a proper pair."
+
+	#method for getting open orders from a variety of markets via Cryptopia API
+	def GetMarketOrderGroups(self, base=None, groups=[], orders=100):
+		#purpose of check is to see if an int pairing was received or non-int pair.
+		check = False;
+
+		if type(groups) != list:
+			return "Your groups are required to be submitted in list format."
+
+		# print(groups[1])
+		if type(groups[1]) == int:
+			grouporder = "-".join(str(pair) for pair in groups)
+			check = True
+		else:
+			grouporder = "_".join(pair for pair in groups)
+
+
+		if orders < 0:
+			return "You entered an invalid amount of orders."
+
+		# print(grouporder)
+
+		if base == None and orders == 100 and check == True:
+			url = self.url + "GetMarketOrderGroups/" + grouporder
+			MarketOrderGroupsInfo = req.get(url)
+
+			return MarketOrderGroupsInfo.json()
+
+		if base != None and orders == 100 and check == False:
+			url = self.url + "GetMarketOrderGroups/" + base + "_" + grouporder + "_" + "UNO"
+			MarketOrderGroupsInfo = req.get(url)
+
+			return MarketOrderGroupsInfo.json()
+
+
+		if base == None and orders != 100 and check == True:
+			url = self.url + "GetMarketOrderGroups/" + grouporder + "/" + str(orders)
+			MarketOrderGroupsInfo = req.get(url)
+
+			return MarketOrderGroupsInfo.json()
+
+		if base != None and orders != 100 and check == False:
+			url = self.url + "GetMarketOrderGroups/" + base + "_" + grouporder + "_" + "UNO/" + str(orders)
+			MarketOrderGroupsInfo = req.get(url)
+
+			return MarketOrderGroupsInfo.json()
+
+
