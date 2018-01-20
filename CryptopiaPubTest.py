@@ -35,3 +35,11 @@ CryptoTest = Public();
 # print(CryptoTest.getMarket(100, 'pie'))
 
 # print(CryptoTest.getMarket('DOT_BTC', 6))
+
+# print(CryptoTest.GetMarketOrderGroups("DOT",["BTC-DOT","LTC-DOT","DOGE-DOT"]))
+
+# print(CryptoTest.GetMarketOrderGroups(None,[100,101,102,103]))
+
+# print(CryptoTest.GetMarketOrderGroups(None, [100,101,102,103],50))
+
+# print(CryptoTest.GetMarketOrderGroups("DOT",["BTC-DOT","LTC-DOT","DOGE-DOT"],50))
